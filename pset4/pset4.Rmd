@@ -14,9 +14,9 @@ nswpsid = read.csv('nswpsid.csv')
 nswcps = read.csv('nswcps.csv')
 ```
 
-## Part 1: Describe the data
+# Part 1: Describe the data
 
-# Question 1: 
+## Question 1: 
 
 ```{r avgs}
 summary_psid <- nswpsid %>% group_by(treat) %>% summarise_all(list(mean))
@@ -24,12 +24,36 @@ summary_psid
 summary_cps <- nswcps %>% group_by(treat) %>% summarise_all(list(mean))
 summary_cps
 ```
-#Question 2: Comment briefly on table 1
+$$
+\begin{tabular}{cccccc}
+\hline
+\textbf{Variable} & \textbf{Definition} & \multicolumn{2}{c}{\textbf{NSW}}    & \textbf{PSID-1}  & \textbf{CPS-1}   \\ \cline{3-6} 
+\textbf{}         & \textbf{}           & \textbf{Treated} & \textbf{Control} & \textbf{Control} & \textbf{Control} \\ 
+\hline
+[1] & [2] & [3] & [4] & [5] & [6] \\ \hline
+\texttt{age}      & Age in years                     & 25.82 & 25.05 & 34.85 & 33.23  \\
+\texttt{edu}      & Education in years               & 10.35 & 10.09 & 12.12 & 12.03  \\
+\texttt{nodegree} & 1 if education $<12$             & 0.71  & 0.83  & 0.31  & 0.30   \\
+\texttt{black}    & 1 if Black                       & 0.84  & 0.83  & 0.25  & 0.07   \\
+\texttt{hisp}     & 1 if Hispanic                    & 0.06  & 0.11  & 0.03  & 0.07   \\
+\texttt{married}  & 1 if married                     & 0.19  & 0.15  & 0.87  & 0.71   \\
+\texttt{u74}      & 1 if unemployed in '74           & 0.71  & 0.75  & 0.09  & 0.12   \\
+\texttt{u75}      & 1 if unemployed in '75           & 0.60  & 0.68  & 0.10  & 0.11   \\
+\texttt{re74}     & Real earnings in '74 (in '82 \$) & 2,096 & 2,107 & 19,429 & 14,017 \\
+\texttt{re75}     & Real earnings in '75 (in '82 \$) & 1,532 & 1,267 & 19,063 & 13,651 \\
+\hline
+\texttt{re78}     & Real earnings in '78 (in '82 \$) & 6,349 & 4,555 & 21,554 & 14,847 \\
+\texttt{treat}    & 1 if received offer of training  & 1     & 0     & 0 & 0        \\ \hline
+Sample Size                        &                                  & 185   & 260   & 2,490 & 15,992 \\ \hline
+\end{tabular}
+$$
+
+## Question 2
 
 The PSID and CPS samples look very different than the NSW data. Both samples have much older control participants, with average ages of about 35 and 33 respectively. These controls have an average of 2 more years of education, are more likely to have college degrees, are much more likely to be married, and are much more likely to be employed in 1974-5. The control group's incomes in both years are much higher. Both control groups are much less likely to be black or hispanic than the NSW controls. 
 
-#Question 3: Why do you think that Dehajia and Wahba constructed their “observational datasets” by pulling together the treated sample from NSW and a sample of individuals drawn from either the PSID or the CPS data?
+## Question 3
 
 I think that Dehajia and Wahba chose not to use purely observational data because of the underlying differences between the household heads who chose to enroll in training courses and those who did not. Because these two groups are demographically very different, if we were to run a regression of 1978 income on treatment, we could not assume exogeneity of the error term because there are so many differences that may affect income between the two groups. 
 
-##Part Two: 
+# Part Two: 
