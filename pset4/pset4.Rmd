@@ -1,0 +1,35 @@
+---
+title: "pset4"
+author: "Eliza Migdal"
+date: "2023-10-15"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(stats)
+library(car)
+nswpsid = read.csv('nswpsid.csv')
+nswcps = read.csv('nswcps.csv')
+```
+
+## Part 1: Describe the data
+
+# Question 1: 
+
+```{r avgs}
+summary_psid <- nswpsid %>% group_by(treat) %>% summarise_all(list(mean))
+summary_psid
+summary_cps <- nswcps %>% group_by(treat) %>% summarise_all(list(mean))
+summary_cps
+```
+#Question 2: Comment briefly on table 1
+
+The PSID and CPS samples look very different than the NSW data. Both samples have much older control participants, with average ages of about 35 and 33 respectively. These controls have an average of 2 more years of education, are more likely to have college degrees, are much more likely to be married, and are much more likely to be employed in 1974-5. The control group's incomes in both years are much higher. Both control groups are much less likely to be black or hispanic than the NSW controls. 
+
+#Question 3: Why do you think that Dehajia and Wahba constructed their “observational datasets” by pulling together the treated sample from NSW and a sample of individuals drawn from either the PSID or the CPS data?
+
+I think that Dehajia and Wahba chose not to use purely observational data because of the underlying differences between the household heads who chose to enroll in training courses and those who did not. Because these two groups are demographically very different, if we were to run a regression of 1978 income on treatment, we could not assume exogeneity of the error term because there are so many differences that may affect income between the two groups. 
+
+##Part Two: 
